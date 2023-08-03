@@ -1,5 +1,7 @@
 import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
+import 'express-async-errors';
+import '@shared/typeorm';
 import cors from 'cors';
 import routes from './routes';
 import AppError from '@shared/errors/AppError';
