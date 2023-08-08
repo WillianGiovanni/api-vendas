@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import User from '../typeorm/entities/User';
 import CreateUserService from '../services/CreateUserService';
 import ListUserService from '../services/ListUserService';
 
