@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import ShowUserService from '../services/ShowUserService';
 import UpdateUserService from '../services/UpdateUserService';
+import { instanceToInstance } from 'class-transformer';
 
 class ProfileController {
   public async show(req: Request, res: Response): Promise<Response> {
@@ -8,7 +9,7 @@ class ProfileController {
     const id = req.user.id;
 
     const users = await showUserService.execute({ id });
-    return res.json(users);
+    return res.json(instanceToInstance(users));
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
@@ -24,7 +25,7 @@ class ProfileController {
       oldPassword,
     });
 
-    return res.json(user);
+    return res.json(instanceToInstance(user));
   }
 }
 
