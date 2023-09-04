@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm';
 import AppError from '@shared/errors/AppError';
 import Product from '../typeorm/entities/Product';
 import ProductRepository from '../typeorm/repositories/ProductsRepository';
+import RedisCache from '@shared/cache/RedisCache';
 
 interface IRequest {
   id: string;
@@ -30,6 +31,10 @@ class UpdateProductService {
     if (productExists && name !== product.name) {
       throw new AppError('Already exists a product with this name');
     }
+
+    const redisCache = new RedisCache();
+
+    await redisCache.invalidate('api-vendas-PRODUCTS-LIST');
 
     product.name = name;
     product.price = price;
