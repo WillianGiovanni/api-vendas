@@ -7,7 +7,7 @@ export default class UploadUserAvatarController {
     console.log(req);
     console.log(req.body);
 
-    const user = uploadAvatar.execute({
+    const user = await uploadAvatar.execute({
       userId: req.user.id,
       avatarFilename: req.file?.filename as string,
     });
